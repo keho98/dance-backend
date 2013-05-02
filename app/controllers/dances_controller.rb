@@ -73,7 +73,11 @@ class DancesController < ApplicationController
   def sync
     @dance = Dance.find(params[:id])
     data = params[:data]
-    render :nothing => true
+    if @dance.sync data
+      render :nothing => true
+    else
+      render json: 'Syncing error', status: :unprocessable_entity
+    end
   end
 
   # DELETE /dances/1
