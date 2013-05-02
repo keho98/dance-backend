@@ -1,15 +1,27 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @dance.title %>
-</p>
-
-<p>
-  <b>Foreign:</b>
-  <%= @dance.foreign_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_dance_path(@dance) %> |
-<%= link_to 'Back', dances_path %>
+<body>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span2">
+          <ul class="dancers nav nav-list bs-docs-sidenav">
+            <li><a href="#" class="header">Dancers</a></li>
+            <div class="dancer_names"></div>
+            <li class="footer_dancers"><a class="add_dancer" href="#"><i class="icon-plus-sign"></i> New Dancer</a></li>
+          </ul>
+          <ul class="blocks nav nav-list bs-docs-sidenav">
+            <li><a href="#" class="header">Colors</a></li>
+          </ul>
+          <br/>
+          <a href="#" class="btn btn-primary save">Save</a> <a href="#" class="btn btn-secondary reset">Reset</a>
+        </div>
+        <div id="main" class="span9">
+          <svg id="canvas"></svg>
+          <div class="timeline">
+            <div class="thumbnail_container">
+              <div class='selected_thumb thumb'><svg></svg></div>
+              <img id="next" src="/img/add.png"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
