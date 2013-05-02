@@ -69,6 +69,13 @@ class DancesController < ApplicationController
     end
   end
 
+  # POST /dances/1/sync
+  def sync
+    @dance = Dance.find(params[:id])
+    data = params[:data]
+    render :nothing => true
+  end
+
   # DELETE /dances/1
   # DELETE /dances/1.json
   def destroy
