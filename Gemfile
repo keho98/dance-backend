@@ -15,6 +15,7 @@ group :test, :development do
   gem 'capybara'
   gem 'launchy'
   gem 'factory_girl_rails'
+  gem 'sqlite3'
 end
 
 # Gems used only for assets and not required
