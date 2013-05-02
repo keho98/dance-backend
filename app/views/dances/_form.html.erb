@@ -1,0 +1,25 @@
+<%= form_for(@dance) do |f| %>
+  <% if @dance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dance.errors.count, "error") %> prohibited this dance from being saved:</h2>
+
+      <ul>
+      <% @dance.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :foreign_id %><br />
+    <%= f.text_field :foreign_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

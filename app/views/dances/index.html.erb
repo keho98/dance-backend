@@ -1,0 +1,25 @@
+<h1>Listing dances</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Foreign</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @dances.each do |dance| %>
+  <tr>
+    <td><%= dance.title %></td>
+    <td><%= dance.foreign_id %></td>
+    <td><%= link_to 'Show', dance %></td>
+    <td><%= link_to 'Edit', edit_dance_path(dance) %></td>
+    <td><%= link_to 'Destroy', dance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Dance', new_dance_path %>

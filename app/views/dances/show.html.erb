@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @dance.title %>
+</p>
+
+<p>
+  <b>Foreign:</b>
+  <%= @dance.foreign_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_dance_path(@dance) %> |
+<%= link_to 'Back', dances_path %>
