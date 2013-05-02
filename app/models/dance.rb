@@ -5,4 +5,8 @@ class Dance < ActiveRecord::Base
   def sync data
 
   end
+
+  def get_data
+
+  end
 end

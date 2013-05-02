@@ -80,6 +80,10 @@ class DancesController < ApplicationController
     end
   end
 
+  def get_data
+
+  end
+
   # DELETE /dances/1
   # DELETE /dances/1.json
   def destroy
