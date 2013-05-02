@@ -2,7 +2,7 @@ class DancesController < ApplicationController
   # GET /dances
   # GET /dances.json
   def index
-    @dances = Dance.all
+    @dances = current_user.dances
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,7 +41,7 @@ class DancesController < ApplicationController
   # POST /dances.json
   def create
     @dance = Dance.new(params[:dance])
-
+    @dance.user = current_user
     respond_to do |format|
       if @dance.save
         format.html { redirect_to @dance, notice: 'Dance was successfully created.' }
