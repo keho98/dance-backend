@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Title</th>
-    <th>Foreign</th>
+    <th>Description</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,7 +12,7 @@
 <% @dances.each do |dance| %>
   <tr>
     <td><%= dance.title %></td>
-    <td><%= dance.foreign_id %></td>
+    <td><%= dance.description %></td>
     <td><%= link_to 'Show', dance %></td>
     <td><%= link_to 'Edit', edit_dance_path(dance) %></td>
     <td><%= link_to 'Destroy', dance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
