@@ -1,5 +1,5 @@
 class Dance < ActiveRecord::Base
-  attr_accessible :foreign_id, :title
+  attr_accessible :foreign_id, :title, :description
   belongs_to :user
 
   def sync data

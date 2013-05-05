@@ -3,6 +3,10 @@
 	background-image: url('/img/stage.jpg');
 }
 
+#main{
+	margin-left: 75px;
+}
+
 #previous{
 	position: fixed;
 	bottom: 25px;
