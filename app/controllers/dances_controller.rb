@@ -14,11 +14,7 @@ class DancesController < ApplicationController
   # GET /dances/1.json
   def show
     @dance = Dance.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @dance }
-    end
+    render :layout => 'dance_layout'
   end
 
   # GET /dances/new

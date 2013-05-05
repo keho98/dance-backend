@@ -1,4 +1,4 @@
-<%= form_for(@dance) do |f| %>
+<%= form_for(@dance,  :html => {:class => "form-signin"}) do |f| %>
   <% if @dance.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@dance.errors.count, "error") %> prohibited this dance from being saved:</h2>
