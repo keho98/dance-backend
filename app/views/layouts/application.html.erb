@@ -53,10 +53,10 @@
       <div>
         <h3 class="muted">FormIT</h3>
 				<ul class="nav nav-pills">
-				  <li class="active">
-				    <a href="#">Home</a>
+				  <li>
+				    <%= link_to 'Home', dances_path %>
 				  </li>
-				  <li><a href="#">Sign Out</a></li>
+				  <li><%= current_user ? link_to('Sign Out',destroy_user_session_path, :method => :delete) : link_to('Sign In',new_user_session_path)%>
 				  <li><a href="#">Settings</a></li>
 				</ul>
       </div>
