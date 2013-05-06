@@ -3,10 +3,6 @@
 	background-image: url('/img/stage.jpg');
 }
 
-#main{
-
-}
-
 #previous{
 	position: fixed;
 	bottom: 25px;
@@ -129,8 +125,9 @@ text{
 }
 
 .dancer_names{
-	height: 250px;
+	height: 180px;
 	overflow: scroll;
+	margin: 0;
 }
 
 .dancer_name_input{
