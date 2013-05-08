@@ -278,7 +278,7 @@ window.dance = {
 		return obj;
 	},
 	readState: function(dance_id){
-		$.get('/get_data' + dance_id, function(data){
+		$.get('/get_data/' + dance_id, function(data){
 			console.log("Data read");
 			return JSON.parse(data);
 		})
