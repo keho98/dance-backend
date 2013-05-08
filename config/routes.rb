@@ -4,6 +4,7 @@ DanceBackend::Application.routes.draw do
   resources :dances do
     member do
       post 'sync'
+      get 'get_data'
     end
   end
 
