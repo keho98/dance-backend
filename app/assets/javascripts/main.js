@@ -278,7 +278,7 @@ window.dance = {
 		return obj;
 	},
 	readState: function(dance_id){
-		$.get('/get_data' + dance_id, function(data){
+		$.get('/dances/' + dance_id + '/get_data', function(data){
 			console.log("Data read");
 			return JSON.parse(data);
 		})
@@ -286,7 +286,7 @@ window.dance = {
 	},
 	saveState: function(dance_id){
 		//sessionStorage.setItem('dance', JSON.stringify(dance.formations));
-		$.post('/sync/' + dance_id, {data : JSON.stringify(dance.formations)}, function(data){
+		$.post('/dances/' + dance_id + '/sync', {data : JSON.stringify(dance.formations)}, function(data){
 			console.log("Success!");
 			alert("Saved!");
 		});

@@ -46,10 +46,10 @@ $(document).ready(function(){
 		}
 	});	
 	$('.save').hammer().on('tap', function(){
-		dance.saveState();
+		dance.saveState($('#dance_id').val());
 	})
 	$('.reset').hammer().on('tap', function(){
-		dance.clearState();
+		dance.clearState($('#dance_id').val());
 	})
 	$('.timeline').hammer().on('tap', '.thumb', function(){
 		var curr_thumb = $(this);
