@@ -32,6 +32,7 @@ class Dance < ActiveRecord::Base
   		@@collection = Mongo::Connection.new(db.host, db.port).db(db_name)[collection_name]
   	else	# development
   		@@collection = Mongo::Connection.new('localhost').db('formitdb')['dancedata']
+  	end
   	
   	@@collection
   end
