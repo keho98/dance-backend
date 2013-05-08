@@ -278,14 +278,18 @@ window.dance = {
 		return obj;
 	},
 	readState: function(dance_id){
-		return sessionStorage.getItem('dance');
+		$.get('/get_data' + dance_id, function(data){
+			console.log("Data read");
+			return JSON.parse(data);
+		})
+		//return sessionStorage.getItem('dance');
 	},
 	saveState: function(dance_id){
-		sessionStorage.setItem('dance', JSON.stringify(dance.formations));
-		alert("Saved!");
-		// $.post('/save_dance/' + dance_id, {data : JSON.stringify(dance.formations)}, function(data){
-		// 	console.log("Success!");
-		// });
+		//sessionStorage.setItem('dance', JSON.stringify(dance.formations));
+		$.post('/sync/' + dance_id, {data : JSON.stringify(dance.formations)}, function(data){
+			console.log("Success!");
+			alert("Saved!");
+		});
 	},
 	clearState: function(dance_id){
 		sessionStorage.removeItem('dance');
