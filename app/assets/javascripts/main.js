@@ -22,8 +22,8 @@ window.dance = {
 	svg: d3.select('#canvas').attr('height', SVG_HEIGHT).attr('width', SVG_WIDTH).attr('class', 'stage'),
 	
 	init: function(){
-		var obj = this,
-		cache = obj.readState($('#dance_id').val());
+		var obj = this;
+		var cache = obj.readState($('#dance_id').val());
 		this.svg.on('touchstart', function(e){
 			obj.deselectAll();
 			obj.renderCircles();	
@@ -46,7 +46,8 @@ window.dance = {
 			}
 		});
 		if(cache){
-			this.formations = JSON.parse(cache)
+			console.log("Showing old")
+			this.formations = cache;
 			this.circles = this.formations[0];
 			this.renderThumb(0,this.circles);
 			for(var i=1; i < this.formations.length; i++){
@@ -279,8 +280,13 @@ window.dance = {
 	},
 	readState: function(dance_id){
 		$.get('/dances/' + dance_id + '/get_data', function(data){
-			console.log("Data read");
-			return JSON.parse(data);
+			if(data != null) {
+				console.log("Data read");
+				console.log(JSON.parse(data.data));
+				return JSON.parse(data.data);
+			} else {
+				alert("Cannot find formation!");
+			}
 		})
 		//return sessionStorage.getItem('dance');
 	},

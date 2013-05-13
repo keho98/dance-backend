@@ -11,6 +11,7 @@ class Dance < ActiveRecord::Base
   		# if foreign_id not set yet, insert data and set the foreign_id
   		f_id = collection.insert({"data" => data}).to_s
   		self.foreign_id = f_id
+      self.save
   	else
   		# if foreign_id is already set, update
   		collection.update({"_id" => self.foreign_id}, {"$data" => data})
@@ -19,13 +20,11 @@ class Dance < ActiveRecord::Base
 
   def get_data
   	collection = Dance.get_mongo_collection
-  	collection.find("_id" => self.foreign_id)
+  	collection.find_one({"_id" => BSON::ObjectId(self.foreign_id)})
   end
 
   def self.get_mongo_collection
-  	return @@collection if @@collection
-  	
-  	if ENV[MONGOHQ_URL] then	# production
+  	if ENV['MONGOHQ_URL'] then	# production
   		db = URI.parse(ENV['MONGOHQ_URL'])
   		db_name = db.path.gsub(/^\//, '')
   		collection_name = 'dancedata'
@@ -33,7 +32,7 @@ class Dance < ActiveRecord::Base
   	else	# development
   		@@collection = Mongo::Connection.new('localhost').db('formitdb')['dancedata']
   	end
-  	
+
   	@@collection
   end
 end
