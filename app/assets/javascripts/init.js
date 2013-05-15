@@ -2,7 +2,7 @@ $(document).ready(function(){
 	sidebar.init();
 	dance.addVerticalLines();
 	dance.addHorizontalLines();
-	dance.init();
+	dance.init(dance.readState($('#dance_id').val()));
 	
 	$('#delete').on('click', function(){
 		dance.removeSelected();

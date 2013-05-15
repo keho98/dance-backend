@@ -21,9 +21,8 @@ window.dance = {
 
 	svg: d3.select('#canvas').attr('height', SVG_HEIGHT).attr('width', SVG_WIDTH).attr('class', 'stage'),
 	
-	init: function(){
+	init: function(cache){
 		var obj = this;
-		var cache = obj.readState($('#dance_id').val());
 		this.svg.on('touchstart', function(e){
 			obj.deselectAll();
 			obj.renderCircles();	
@@ -286,6 +285,7 @@ window.dance = {
 				return JSON.parse(data.data);
 			} else {
 				alert("Cannot find formation!");
+				return null;
 			}
 		})
 		//return sessionStorage.getItem('dance');
