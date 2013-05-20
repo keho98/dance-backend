@@ -14,7 +14,7 @@ class Dance < ActiveRecord::Base
       self.save
   	else
   		# if foreign_id is already set, update
-  		collection.update({"_id" => self.foreign_id}, {"$data" => data})
+  		collection.update({"_id" => self.foreign_id}, "$set" => {"data" => data})
   	end
   end
 
