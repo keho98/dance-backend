@@ -30,11 +30,10 @@ class Dance < ActiveRecord::Base
   		collection_name = 'dancedata'
   		@@collection = Mongo::Connection.new(db.host, db.port).db(db_name)
       @@collection.authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
-      @@collection[collection_name]
   	else	# development
-  		@@collection = Mongo::Connection.new('localhost').db('formitdb')['dancedata']
+  		@@collection = Mongo::Connection.new('localhost').db('formitdb')
   	end
 
-  	@@collection
+  	@@collection['dancedata']
   end
 end
