@@ -29,6 +29,7 @@ class Dance < ActiveRecord::Base
   		db_name = db.path.gsub(/^\//, '')
   		collection_name = 'dancedata'
   		@@collection = Mongo::Connection.new(db.host, db.port).db(db_name)[collection_name]
+      @@collection.authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
   	else	# development
   		@@collection = Mongo::Connection.new('localhost').db('formitdb')['dancedata']
   	end
