@@ -45,7 +45,7 @@ window.dance = {
 			}
 		});
 		if(cache){
-			console.log("Showing old")
+			console.log("Showing old");
 			this.formations = cache;
 			this.circles = this.formations[0];
 			this.renderThumb(0,this.circles);
@@ -282,7 +282,8 @@ window.dance = {
 			if(data != null) {
 				console.log("Data read");
 				console.log(JSON.parse(data.data));
-				return JSON.parse(data.data)[0];
+				dance.init(JSON.parse(data.data)[0])
+				return true;
 			} else {
 				alert("Cannot find formation!");
 				return null;
