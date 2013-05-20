@@ -282,7 +282,7 @@ window.dance = {
 			if(data != null) {
 				console.log("Data read");
 				console.log(JSON.parse(data.data));
-				dance.init(JSON.parse(data.data)[0])
+				dance.init(JSON.parse(data.data))
 				return true;
 			} else {
 				alert("Cannot find formation!");
