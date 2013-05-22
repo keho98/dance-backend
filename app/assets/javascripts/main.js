@@ -292,6 +292,7 @@ window.dance = {
 		//return sessionStorage.getItem('dance');
 	},
 	saveState: function(dance_id){
+		dance.formations[dance.f_id] = dance.circles
 		//sessionStorage.setItem('dance', JSON.stringify(dance.formations));
 		$.post('/dances/' + dance_id + '/sync', {data : JSON.stringify(dance.formations)}, function(data){
 			console.log("Success!");
