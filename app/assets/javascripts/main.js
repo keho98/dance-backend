@@ -179,6 +179,8 @@ window.dance = {
 				.duration(500)
 				.style('opacity', 0)
 				.remove();
+		// save state
+		dance.saveState(dance.d_id);
 	},
 	renderThumb: function(index, circles){
 		var groups = d3.select($('.thumb')[index]).selectAll('svg').selectAll('g');
@@ -228,6 +230,8 @@ window.dance = {
 				.each('end', function(){ this.dragging = false;});
 		d3.event.sourceEvent.stopPropagation();	
 		dance.renderThumb(dance.f_id, dance.circles);
+		// auto-save
+		//dance.saveState(dance.d_id);
 	},
 
 	circledragmove: function(d) {
@@ -294,7 +298,7 @@ window.dance = {
 		//sessionStorage.setItem('dance', JSON.stringify(dance.formations));
 		$.post('/dances/' + dance_id + '/sync', {data : JSON.stringify(dance.formations)}, function(data){
 			console.log("Success!");
-			alert("Saved!");
+			//alert("Saved!");
 		});
 	},
 	clearState: function(dance_id){
