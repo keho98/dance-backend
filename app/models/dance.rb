@@ -14,13 +14,17 @@ class Dance < ActiveRecord::Base
       self.save
   	else
   		# if foreign_id is already set, update
-  		collection.update({"_id" => self.foreign_id}, {"$data" => data})
+  		collection.update({"_id" => BSON::ObjectId(self.foreign_id)}, {"$set" => {"data" => data}})
   	end
   end
 
   def get_data
-  	collection = Dance.get_mongo_collection
-  	collection.find_one({"_id" => BSON::ObjectId(self.foreign_id)})
+    if self.foreign_id
+    	collection = Dance.get_mongo_collection
+    	collection.find_one({"_id" => BSON::ObjectId(self.foreign_id)})
+    else 
+      nil
+    end
   end
 
   def self.get_mongo_collection
@@ -28,11 +32,12 @@ class Dance < ActiveRecord::Base
   		db = URI.parse(ENV['MONGOHQ_URL'])
   		db_name = db.path.gsub(/^\//, '')
   		collection_name = 'dancedata'
-  		@@collection = Mongo::Connection.new(db.host, db.port).db(db_name)[collection_name]
+  		@@collection = Mongo::Connection.new(db.host, db.port).db(db_name)
+      @@collection.authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
   	else	# development
-  		@@collection = Mongo::Connection.new('localhost').db('formitdb')['dancedata']
+  		@@collection = Mongo::Connection.new('localhost').db('formitdb')
   	end
 
-  	@@collection
+  	@@collection['dancedata']
   end
 end
