@@ -11,7 +11,7 @@ class Dance < ActiveRecord::Base
   		# if foreign_id not set yet, insert data and set the foreign_id
   		f_id = collection.insert({"data" => data}).to_s
   		self.foreign_id = f_id
-      self.save
+      self.save!
   	else
   		# if foreign_id is already set, update
   		collection.update({"_id" => BSON::ObjectId(self.foreign_id)}, {"$set" => {"data" => data}})
@@ -21,9 +21,9 @@ class Dance < ActiveRecord::Base
   def get_data
     if self.foreign_id
     	collection = Dance.get_mongo_collection
-    	collection.find_one({"_id" => BSON::ObjectId(self.foreign_id)})
+    	return collection.find_one({"_id" => BSON::ObjectId(self.foreign_id)})
     else 
-      nil
+      return nil
     end
   end
 
