@@ -19,8 +19,12 @@ class Dance < ActiveRecord::Base
   end
 
   def get_data
-  	collection = Dance.get_mongo_collection
-  	collection.find_one({"_id" => BSON::ObjectId(self.foreign_id)})
+    if self.foreign_id
+    	collection = Dance.get_mongo_collection
+    	collection.find_one({"_id" => BSON::ObjectId(self.foreign_id)})
+    else 
+      nil
+    end
   end
 
   def self.get_mongo_collection
