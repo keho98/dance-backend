@@ -179,7 +179,7 @@ window.dance = {
 				.style('opacity', 0)
 				.remove();
 		// save state
-		dance.saveState(dance.d_id);
+		dance.saveState($('#dance_id').val());
 	},
 	renderThumb: function(index, circles){
 		var groups = d3.select($('.thumb')[index]).selectAll('svg').selectAll('g');
