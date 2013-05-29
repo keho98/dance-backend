@@ -11,6 +11,7 @@ colors = d3.scale.category10();
 window.dance = {
 	formations: new Array(),
 	circles: new Array(),
+	comments: new Array(),
 	dragging: false,
 	d_id: 0,
 	f_id: 0,
@@ -134,12 +135,13 @@ window.dance = {
 			console.log("invalid formation id");
 		} else {
 			console.log("showing formation " + index);
+			this.comments[this.f_id] = $('#comment_field').val();
 			this.f_id = index;
 
 			var children = $('.thumbnail_container').children('.thumb');
 			children.removeClass('selected_thumb');
 			children.eq(this.f_id).addClass('selected_thumb');
-
+			$('#comment_field').val(this.comments[this.f_id]);
 			this.circles = this.formations[this.f_id];
 			this.renderCircles();
 		}

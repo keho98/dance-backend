@@ -12,7 +12,7 @@
             <li><a href="#" class="header">Colors</a></li>
           </ul>
           <br/>
-          <a href="#" class="btn btn-primary save">Save</a> <a href="#" class="btn btn-secondary comments">Comments</a>
+          <a href="#" class="btn btn-primary save">Save</a></br></br><button id="comment_toggle" class="btn">Comments</button>
         </div>
         <div id="main" class="span9">
           <svg id="canvas"></svg>
@@ -24,4 +24,16 @@
           </div>
         </div>
       </div>
-    </div> <!-- /container -->
+    </div> 
+    <div id="comments" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <h3 id="myModalLabel">Comments</h3>
+      </div>
+      <div class="modal-body">
+        <p> Add comments in the field below. </p>
+        <textarea id='comment_field' rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Save Comment</button>
+      </div>
+    </div><!-- /container -->

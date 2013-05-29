@@ -48,6 +48,9 @@ $(document).ready(function(){
 	$('.save').hammer().on('tap', function(){
 		dance.saveState($('#dance_id').val());
 	});
+	$('#comment_toggle').hammer().on('tap', function(){
+		$('#comments').modal('show');
+	});
 	$('.timeline').hammer().on('tap', '.thumb', function(){
 		var curr_thumb = $(this);
 		var index = curr_thumb.parent().children('.thumb').index(curr_thumb);
