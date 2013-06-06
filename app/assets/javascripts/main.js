@@ -47,8 +47,10 @@ window.dance = {
 		});
 		if(cache){
 			console.log("Showing old");
-			this.formations = cache;
+			this.formations = cache.formations;
+			this.comments = cache.comments;
 			this.circles = this.formations[0];
+			if(this.comments[0]) $('#comment_field').val(this.comments[0]);
 			this.renderThumb(0,this.circles);
 			for(var i=1; i < this.formations.length; i++){
 				$('#next').before("<div class='thumb'><svg></svg></div>");
@@ -300,7 +302,7 @@ window.dance = {
 	saveState: function(dance_id){
 		dance.formations[dance.f_id] = dance.circles
 		//sessionStorage.setItem('dance', JSON.stringify(dance.formations));
-		$.post('/dances/' + dance_id + '/sync', {data : JSON.stringify(dance.formations)}, function(data){
+		$.post('/dances/' + dance_id + '/sync', {data : JSON.stringify({formations: dance.formations, comments: dance.comments)}, function(data){
 			console.log("Success!");
 			//alert("Saved!");
 		});
