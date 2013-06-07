@@ -26,30 +26,22 @@ window.dance = {
 	init: function(cache){
 		var obj = this;
 		this.svg.on('touchstart', function(e){
-			alert("touchstart");
 			obj.deselectAll();
 			obj.renderCircles(false);
 		});
 		this.svg.on('click', function(e){
-			alert("click");
 			// check if a dot was clicked
 			var dot_clicked = false;
-			if(d3.event){
-				var touch = [d3.event.dx, d3.event.dy];
-				for(var i = 0; i < dance.circles.length; i++){
-					if(Math.abs(dance.circles[i].x + d3.event.target.offsetLeft - touch[0]) < dance.circles[i].r 
-						&& Math.abs(dance.circles[i].y + d3.event.target.offsetTop - touch[1]) < dance.circles[i].r ){
-						dot_clicked = true;
-					}
+			var touch = d3.mouse($('#canvas')[0]);
+			for(var i = 0; i < dance.circles.length; i++){
+				if(Math.abs(dance.circles[i].x + d3.event.target.offsetLeft - touch[0]) < dance.circles[i].r 
+					&& Math.abs(dance.circles[i].y + d3.event.target.offsetTop - touch[1]) < dance.circles[i].r ){
+					dot_clicked = true;
 				}
 			}
-
 			if(!dot_clicked){
-				alert("not dot");
 				obj.deselectAll();
 				obj.renderCircles(false);
-			} else {
-				alert("dot");
 			}
 		});
 		this.svg.on('touchmove', function(e){
