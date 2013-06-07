@@ -26,10 +26,12 @@ window.dance = {
 	init: function(cache){
 		var obj = this;
 		this.svg.on('touchstart', function(e){
+			alert("touchstart");
 			obj.deselectAll();
 			obj.renderCircles(false);
 		});
 		this.svg.on('click', function(e){
+			alert("click");
 			// check if a dot was clicked
 			var dot_clicked = false;
 			if(d3.event){
