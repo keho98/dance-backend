@@ -19,6 +19,7 @@ window.dance = {
 	normal_width: "1",
 	bold_opacity: "1.0",
 	bold_width: "2",
+	first_load: true,
 
 	svg: d3.select('#canvas').attr('height', SVG_HEIGHT).attr('width', SVG_WIDTH).attr('class', 'stage'),
 	
@@ -26,11 +27,28 @@ window.dance = {
 		var obj = this;
 		this.svg.on('touchstart', function(e){
 			obj.deselectAll();
-			obj.renderCircles();	
+			obj.renderCircles(false);
 		});
 		this.svg.on('click', function(e){
-			obj.deselectAll();
-			obj.renderCircles();	
+			// check if a dot was clicked
+			var dot_clicked = false;
+			if(d3.event){
+				var touch = [d3.event.dx, d3.event.dy];
+				for(var i = 0; i < dance.circles.length; i++){
+					if(Math.abs(dance.circles[i].x + d3.event.target.offsetLeft - touch[0]) < dance.circles[i].r 
+						&& Math.abs(dance.circles[i].y + d3.event.target.offsetTop - touch[1]) < dance.circles[i].r ){
+						dot_clicked = true;
+					}
+				}
+			}
+
+			if(!dot_clicked){
+				alert("not dot");
+				obj.deselectAll();
+				obj.renderCircles(false);
+			} else {
+				alert("dot");
+			}
 		});
 		this.svg.on('touchmove', function(e){
 			d3.event.preventDefault();
@@ -42,7 +60,7 @@ window.dance = {
 						dance.circles[i].class = 'selected_dancer';
 					}
 				}
-				dance.renderCircles();
+				dance.renderCircles(false);
 			}
 		});
 		if(cache){
@@ -151,8 +169,9 @@ window.dance = {
 	addNewFormation: function(){
 		var newFormation = _.map(this.circles, function(d){ var o = new Object(); return _.extend(o, d);})
 		this.formations.push(newFormation);
+		this.renderCircles(true);
 	},
-	renderCircles: function(){
+	renderCircles: function(autosave){
 		var drag = d3.behavior.drag()
 								.on('drag', this.circledragmove)
 								.on('dragstart', this.circledragstart)
@@ -160,20 +179,27 @@ window.dance = {
 		var groups = this.svg.selectAll('g').data(this.circles, function(d){ return d.d_id});
 		this.svg.selectAll('g').transition()
 			.duration(500)
-			.attr('transform', function(d){ return 'translate(' + [d.x,d.y]+ ')'})
+			.attr('transform', function(d){ return 'translate(' + [d.x,d.y]+ ')'});
+		// this code deselects the circles
 		this.svg.selectAll('g').select('circle')
 				.attr('class', function(d){ return d.class })
-				.style('fill', function(d){ return d.fillColor})
+				.style('fill', function(d){ return d.fillColor});
 		new_groups = groups.enter().append('svg:g');
 		new_groups.attr('transform', function(d){ return 'translate(' + [d.x,d.y]+ ')'})
 			.call(drag)
 				.append('svg:circle')
 				.attr('r', 1)
 				.attr('class', function(d){ return d.class })
-				.style('fill', function(d){ return d.fillColor})
-		dance.svg.selectAll('circle').transition()
+				.style('fill', function(d){ return d.fillColor});
+		if(this.first_load){
+			dance.svg.selectAll('circle').transition()
 					.attr('r', function(d){ return d.r;})
 					.duration(500);
+			this.first_load = false;
+		} else {
+			this.svg.selectAll('g').select('circle')
+				.attr('r', function(d){ return d.r });
+		}
 		new_groups.append('svg:text')
 			.text(function(d){ console.log("setting normal radius of circle to " + d.r); return d.dancer_name;})
 			.attr('text-anchor', 'middle');
@@ -182,8 +208,11 @@ window.dance = {
 				.duration(500)
 				.style('opacity', 0)
 				.remove();
-		// save state
-		dance.saveState($('#dance_id').val());
+
+		if(autosave){
+			// save state
+			dance.saveState($('#dance_id').val());
+		}
 	},
 	renderThumb: function(index, circles){
 		var groups = d3.select($('.thumb')[index]).selectAll('svg').selectAll('g');
@@ -199,7 +228,6 @@ window.dance = {
 	deselectAll: function(){
 		console.log("deselecting all!");
 		_.each(this.circles, function(d){ d.class = 'dancer';});
-		this.renderCircles();
 	},
 
 	selectDancer: function(dancer){
@@ -234,7 +262,7 @@ window.dance = {
 		d3.event.sourceEvent.stopPropagation();	
 		dance.renderThumb(dance.f_id, dance.circles);
 		// auto-save
-		//dance.saveState(dance.d_id);
+		dance.saveState($('#dance_id').val());
 	},
 
 	circledragmove: function(d) {
@@ -250,7 +278,7 @@ window.dance = {
 		var dancer = this.createDancer(this.d_id, 50, 50, name);
 		this.d_id++;
 		this.circles.push(dancer);
-		this.renderCircles();
+		this.renderCircles(true);
 		dance.renderThumb(dance.f_id, dance.circles);
 	},
 
@@ -259,6 +287,7 @@ window.dance = {
 		this.svg.selectAll('circle').data(this.circles)
 			.style('fill', function(d){ console.log(d.fillColor);return d.fillColor});
 		this.deselectAll();
+		this.renderCircles(true);
 		dance.renderThumb(dance.f_id, dance.circles);
 	},
 	removeSelected: function(){
@@ -300,11 +329,13 @@ window.dance = {
 		//return sessionStorage.getItem('dance');
 	},
 	saveState: function(dance_id){
+		$(".save_status").html("Auto-saving...");
 		dance.formations[dance.f_id] = dance.circles
 		//sessionStorage.setItem('dance', JSON.stringify(dance.formations));
 		$.post('/dances/' + dance_id + '/sync', {data : JSON.stringify({formations: dance.formations, comments: dance.comments})}, function(data){
-			console.log("Success!");
-			//alert("Saved!");
+			window.setTimeout(function(){
+				$(".save_status").html("Saved!");
+			}, 500);
 		});
 	},
 	clearState: function(dance_id){
