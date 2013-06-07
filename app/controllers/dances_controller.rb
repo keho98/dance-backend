@@ -1,4 +1,5 @@
 class DancesController < ApplicationController
+  skip_before_filter :authenticate_user!, :only => [:show, :get_data]
   # GET /dances
   # GET /dances.json
   def index
@@ -14,6 +15,7 @@ class DancesController < ApplicationController
   # GET /dances/1.json
   def show
     @dance = Dance.find(params[:id])
+    @editable = current_user and current_user.dances.exists?(@dance) 
     render :layout => 'dance_layout'
   end
 
