@@ -39,6 +39,7 @@ window.dance = {
 					dot_clicked = true;
 				}
 			}
+			
 			if(!dot_clicked){
 				obj.deselectAll();
 				obj.renderCircles(false);
