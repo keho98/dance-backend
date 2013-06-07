@@ -12,7 +12,10 @@
             <li><a href="#" class="header">Colors</a></li>
           </ul>
           <br/>
-          <a href="#" class="btn btn-primary save">Save</a></br></br><button id="comment_toggle" class="btn">Comments</button>
+          <% if @editable %>
+            <a href="#" class="btn btn-primary save">Save</a>
+          <% end %>   
+            </br></br><button id="comment_toggle" class="btn">Comments</button>
         </div>
         <div id="main" class="span9">
           <svg id="canvas"></svg>
