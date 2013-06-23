@@ -82,11 +82,7 @@ class DancesController < ApplicationController
   def get_data
     @dance = Dance.find(params[:id])
     data = @dance.get_data
-    if data then
-      render :json => data, :status => :ok
-    else
-      render json: 'Get data error', status: :unprocessable_entity
-    end
+    render :json => data, :status => :ok
   end
 
   # DELETE /dances/1

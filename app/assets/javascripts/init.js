@@ -48,11 +48,15 @@ $(document).ready(function(){
 	$('.save').hammer().on('tap', function(){
 		dance.saveState($('#dance_id').val());
 	});
+	
 	$('#comment_toggle').hammer().on('tap', function(){
 		$('#comments').modal('show');
 	});
-	$('#slideshow_toggle').hammer().on('tap', function(){
+
+	$('.play_slideshow').hammer().on('tap', function(){
 		if(dance.f_id !== dance.formations.length - 1){
+			//$(this)."<button id=""slideshow_toggle"" class=""btn""><span>Play Slideshow</span></button>"
+			//$(this).children('span').html("Stop Slideshow");
 			dance.nextFormation();
 		} else {
 			return;
@@ -65,6 +69,24 @@ $(document).ready(function(){
 			dance.nextFormation();
 		}, 1000);
 	});
+
+	$('.stop_slideshow').hammer().on('tap', function(){
+		if(dance.f_id !== dance.formations.length - 1){
+			//$(this)."<button id=""slideshow_toggle"" class=""btn""><span>Play Slideshow</span></button>"
+			$(this).children('span').html("Stop Slideshow");
+			dance.nextFormation();
+		} else {
+			return;
+		}
+		var interval = window.setInterval(function(){
+			if(dance.f_id === dance.formations.length - 1){
+				window.clearInterval(interval);
+				return;
+			}
+			dance.nextFormation();
+		}, 1000);
+	});
+
 	$('.timeline').hammer().on('tap', '.thumb', function(){
 		var curr_thumb = $(this);
 		var index = curr_thumb.parent().children('.thumb').index(curr_thumb);

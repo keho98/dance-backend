@@ -33,7 +33,12 @@ window.dance = {
 			// check if a dot was clicked
 			var dot_clicked = false;
 			var touch = d3.mouse($('#canvas')[0]);
+			console.log(touch);
 			for(var i = 0; i < dance.circles.length; i++){
+				console.log("circle x: " + dance.circles[i].x);
+				console.log("circle y: " + dance.circles[i].y);
+				console.log("offset left: " + d3.event.target.offsetLeft);
+				console.log("offset top: " + d3.event.target.offsetTop);
 				if(Math.abs(dance.circles[i].x + d3.event.target.offsetLeft - touch[0]) < dance.circles[i].r 
 					&& Math.abs(dance.circles[i].y + d3.event.target.offsetTop - touch[1]) < dance.circles[i].r ){
 					dot_clicked = true;
@@ -41,6 +46,7 @@ window.dance = {
 			}
 			
 			if(!dot_clicked){
+				console.log("not dot clicked");
 				obj.deselectAll();
 				obj.renderCircles(false);
 			}
@@ -310,17 +316,20 @@ window.dance = {
 		return obj;
 	},
 	readState: function(dance_id){
+		//alert("reading state...");
 		$.get('/dances/' + dance_id + '/get_data', function(data){
+			//alert("data: " + data);
 			if(data != null) {
 				console.log("Data read");
 				console.log(JSON.parse(data.data));
-				dance.init(JSON.parse(data.data))
+				dance.init(JSON.parse(data.data));
 				return true;
 			} else {
-				alert("Cannot find formation!");
+				//alert("Cannot find formation!");
+				dance.init(null);
 				return null;
 			}
-		})
+		});
 		//return sessionStorage.getItem('dance');
 	},
 	saveState: function(dance_id){
