@@ -33,12 +33,10 @@ window.dance = {
 			// check if a dot was clicked
 			var dot_clicked = false;
 			var touch = d3.mouse($('#canvas')[0]);
-			console.log(touch);
+			console.log("touch: " + touch);
 			for(var i = 0; i < dance.circles.length; i++){
-				console.log("circle x: " + dance.circles[i].x);
-				console.log("circle y: " + dance.circles[i].y);
-				console.log("offset left: " + d3.event.target.offsetLeft);
-				console.log("offset top: " + d3.event.target.offsetTop);
+				console.log("circle " + i + " x: " + Math.abs(dance.circles[i].x + d3.event.target.offsetLeft));
+				console.log("circle " + i + " y: " + Math.abs(dance.circles[i].y + d3.event.target.offsetTop));
 				if(Math.abs(dance.circles[i].x + d3.event.target.offsetLeft - touch[0]) < dance.circles[i].r 
 					&& Math.abs(dance.circles[i].y + d3.event.target.offsetTop - touch[1]) < dance.circles[i].r ){
 					dot_clicked = true;

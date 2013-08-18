@@ -53,6 +53,7 @@ $(document).ready(function(){
 		$('#comments').modal('show');
 	});
 
+/*
 	$('.play_slideshow').hammer().on('tap', function(){
 		if(dance.f_id !== dance.formations.length - 1){
 			//$(this)."<button id=""slideshow_toggle"" class=""btn""><span>Play Slideshow</span></button>"
@@ -86,7 +87,7 @@ $(document).ready(function(){
 			dance.nextFormation();
 		}, 1000);
 	});
-
+*/
 	$('.timeline').hammer().on('tap', '.thumb', function(){
 		var curr_thumb = $(this);
 		var index = curr_thumb.parent().children('.thumb').index(curr_thumb);
