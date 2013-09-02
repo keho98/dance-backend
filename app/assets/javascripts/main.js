@@ -347,6 +347,9 @@ window.dance = {
 	clearState: function(dance_id){
 		sessionStorage.removeItem('dance');
 		location.reload();
+	},
+	addComment: function(text){
+		dance.comments[dance.f_id] = text;
 	}
 }
 

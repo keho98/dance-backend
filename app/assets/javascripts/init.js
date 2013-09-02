@@ -53,6 +53,10 @@ $(document).ready(function(){
 		$('#comments').modal('show');
 	});
 
+	$('#comments').on('hidden', function(){
+		dance.addComment($('#comment_field').val());
+	});
+
 /*
 	$('.play_slideshow').hammer().on('tap', function(){
 		if(dance.f_id !== dance.formations.length - 1){
