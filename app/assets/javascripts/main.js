@@ -64,6 +64,7 @@ window.dance = {
 		});
 		if(cache){
 			console.log("Showing old");
+			console.log(cache)
 			this.formations = cache.formations;
 			this.comments = cache.comments;
 			this.circles = this.formations[0];
@@ -73,6 +74,9 @@ window.dance = {
 				$('#next').before("<div class='thumb'><svg></svg></div>");
 				this.renderThumb(i,this.formations[i]);
 			}
+      for(var i=0; i<this.circles.length; i++){
+        $('.dancer_names').append('<li><a href="#">' + this.circles[i].dancer_name + '</a><input type="hidden" value="' + this.circles[i].dancer_name + '"/></li>')
+      }
 			this.renderCircles();
 		}
 		else{
@@ -343,6 +347,9 @@ window.dance = {
 	clearState: function(dance_id){
 		sessionStorage.removeItem('dance');
 		location.reload();
+	},
+	addComment: function(text){
+		dance.comments[dance.f_id] = text;
 	}
 }
 

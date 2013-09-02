@@ -1,5 +1,6 @@
 class DancesController < ApplicationController
   skip_before_filter :authenticate_user!, :only => [:show, :get_data]
+  protect_from_forgery :except => :sync
   # GET /dances
   # GET /dances.json
   def index

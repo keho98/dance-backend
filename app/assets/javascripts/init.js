@@ -61,6 +61,10 @@ $(document).ready(function(){
 	$('.stop_slideshow').css('display', 'none');
 	$('.play_slideshow').css('display', 'inline');
 	
+	$('#comments').on('hidden', function(){
+		dance.addComment($('#comment_field').val());
+	});
+
 	$('.play_slideshow').hammer().on('tap', function(){
 		// hide play slideshow button and show the stop slideshow button instead
 		$(this).css('display', 'none');
