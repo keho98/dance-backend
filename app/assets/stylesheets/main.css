@@ -138,3 +138,7 @@ text{
 .dancer_name_input{
 	width:93%;
 }
+
+#share_url{
+	z-index:5000;
+}

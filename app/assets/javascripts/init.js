@@ -53,41 +53,54 @@ $(document).ready(function(){
 		$('#comments').modal('show');
 	});
 
-/*
+	$("#share_url").html(location.href);
+	$('#share_button').hammer().on('tap', function(){
+		$('#share_url_modal').modal('show');
+	});
+
+	$('.stop_slideshow').css('display', 'none');
+	$('.play_slideshow').css('display', 'inline');
+	
 	$('.play_slideshow').hammer().on('tap', function(){
+		// hide play slideshow button and show the stop slideshow button instead
+		$(this).css('display', 'none');
+		$('.stop_slideshow').css('display', 'inline');
+		
 		if(dance.f_id !== dance.formations.length - 1){
 			//$(this)."<button id=""slideshow_toggle"" class=""btn""><span>Play Slideshow</span></button>"
 			//$(this).children('span').html("Stop Slideshow");
 			dance.nextFormation();
 		} else {
-			return;
+			// already on last formation
+			// so go to beginning and start
+			dance.showFormation(0);
 		}
 		var interval = window.setInterval(function(){
 			if(dance.f_id === dance.formations.length - 1){
+				var interval = $('.hidden_interval').val();
 				window.clearInterval(interval);
+				$('.play_slideshow').css('display', 'inline');
+				$('.stop_slideshow').css('display', 'none');
 				return;
 			}
 			dance.nextFormation();
 		}, 1000);
+		if ($('.hidden_interval').length == 0) {
+			// does not already exist
+			$('.play_slideshow').after('<input type="hidden" value="' + interval + '" class="hidden_interval"/>');
+		} else {
+			// already exists
+			$('.hidden_interval').val(interval);
+		}
 	});
 
 	$('.stop_slideshow').hammer().on('tap', function(){
-		if(dance.f_id !== dance.formations.length - 1){
-			//$(this)."<button id=""slideshow_toggle"" class=""btn""><span>Play Slideshow</span></button>"
-			$(this).children('span').html("Stop Slideshow");
-			dance.nextFormation();
-		} else {
-			return;
-		}
-		var interval = window.setInterval(function(){
-			if(dance.f_id === dance.formations.length - 1){
-				window.clearInterval(interval);
-				return;
-			}
-			dance.nextFormation();
-		}, 1000);
+		$(this).css('display', 'none');
+		$('.play_slideshow').css('display', 'inline');
+		var interval = $('.hidden_interval').val();
+		window.clearInterval(interval);
 	});
-*/
+
 	$('.timeline').hammer().on('tap', '.thumb', function(){
 		var curr_thumb = $(this);
 		var index = curr_thumb.parent().children('.thumb').index(curr_thumb);

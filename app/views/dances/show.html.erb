@@ -11,13 +11,14 @@
           <ul class="blocks nav nav-tabs nav-stacked">
             <li><a href="#" class="header">Colors</a></li>
           </ul>
-          <br/>
           <% if @editable %>
             <!--<a href="#" class="btn btn-primary save">Save</a>-->
             <a class='save_status'></a>
           <% end %>
             </br></br><button id="comment_toggle" class="btn">Comments</button>
-            <!--</br></br><button id="slideshow_toggle" class="btn play_slideshow"><span>Play Slideshow</span></button>-->
+            </br></br><button class="btn play_slideshow"><span>Play Slideshow</span></button>
+            <button class="btn stop_slideshow"><span>Stop Slideshow</span></button>
+            </br></br><button id="share_button" class="btn">Share Dance</button>
         </div>
         <div id="main" class="span9">
           <svg id="canvas"></svg>
@@ -29,7 +30,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- container -->
     <div id="comments" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <h3 id="myModalLabel">Comments</h3>
@@ -41,4 +42,16 @@
       <div class="modal-footer">
         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Save Comment</button>
       </div>
-    </div><!-- /container -->
+    </div>
+    <div id="share_url_modal" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <h3 id="myModalLabel">Share</h3>
+      </div>
+      <div class="modal-body">
+        <p> Share this dance with your dancers by giving them the URL of this page: </p>
+        <div id="share_url"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
+      </div>
+    </div>
