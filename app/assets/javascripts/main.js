@@ -64,6 +64,7 @@ window.dance = {
 		});
 		if(cache){
 			console.log("Showing old");
+			console.log(cache)
 			this.formations = cache.formations;
 			this.comments = cache.comments;
 			this.circles = this.formations[0];
