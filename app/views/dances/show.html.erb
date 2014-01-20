@@ -3,14 +3,24 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="span2">
-          <ul class="dancers nav nav-tabs nav-stacked">
-            <li><a href="#" class="header">Dancers</a></li>
-            <ul class="dancer_names nav nav-tabs nav-stacked"></ul>
-            <li class="footer_dancers"><a class="add_dancer" href="#"><i class="icon-plus-sign"></i> New Dancer</a></li>
-          </ul>
-          <ul class="blocks nav nav-tabs nav-stacked">
-            <li><a href="#" class="header">Colors</a></li>
-          </ul>
+          <% if @editable %>
+            <ul class="dancers nav nav-tabs nav-stacked">
+          <% else %>
+            <ul class="dancers nav nav-tabs nav-stacked read_only">
+          <% end %>
+              <li><a href="#" class="header">Dancers</a></li>
+              <ul class="dancer_names nav nav-tabs nav-stacked"></ul>
+              <li class="footer_dancers"><a class="add_dancer" href="#"><i class="icon-plus-sign"></i> New Dancer</a></li>
+            </ul>
+
+          <% if @editable %>
+            <ul class="blocks nav nav-tabs nav-stacked">
+          <% else %>
+            <ul class="blocks nav nav-tabs nav-stacked read_only">
+          <% end %>
+              <li><a href="#" class="header">Colors</a></li>
+            </ul>
+          
           <% if @editable %>
             <!--<a href="#" class="btn btn-primary save">Save</a>-->
             <a class='save_status'></a>
@@ -23,11 +33,19 @@
           </div>
         </div>
         <div id="main" class="span9">
-          <svg id="canvas"></svg>
+          <% if @editable %>
+            <svg id="canvas" class="stage"></svg>
+          <% else %>
+            <svg id="canvas" class="stage read_only"></svg>
+          <% end %>
           <div class="timeline">
             <div class="thumbnail_container">
               <div class='selected_thumb thumb'><svg></svg></div>
-              <img id="next" src="/img/add.png"/>
+              <% if @editable %>
+                <img id="next" src="/img/add.png" />
+              <% else %>
+                <img id="next" src="/img/add.png" class="read_only"/>
+              <% end %>
             </div>
           </div>
         </div>

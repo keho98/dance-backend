@@ -142,3 +142,7 @@ text{
 #share_url{
 	z-index:5000;
 }
+
+.read_only{
+	pointer-events: none;
+}

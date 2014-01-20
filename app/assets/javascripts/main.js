@@ -21,7 +21,7 @@ window.dance = {
 	bold_width: "2",
 	first_load: true,
 
-	svg: d3.select('#canvas').attr('height', SVG_HEIGHT).attr('width', SVG_WIDTH).attr('class', 'stage'),
+	svg: d3.select('#canvas').attr('height', SVG_HEIGHT).attr('width', SVG_WIDTH),
 	
 	init: function(cache){
 		var obj = this;
@@ -64,7 +64,7 @@ window.dance = {
 		});
 		if(cache){
 			console.log("Showing old");
-			console.log(cache)
+			console.log(cache);
 			this.formations = cache.formations;
 			this.comments = cache.comments;
 			this.circles = this.formations[0];
@@ -158,6 +158,7 @@ window.dance = {
 			console.log("invalid formation id");
 		} else {
 			console.log("showing formation " + index);
+			console.log("comment field value: " + $('#comment_field').val());
 			this.comments[this.f_id] = $('#comment_field').val();
 			this.f_id = index;
 
@@ -338,6 +339,7 @@ window.dance = {
 		$(".save_status").html("Auto-saving...");
 		dance.formations[dance.f_id] = dance.circles
 		//sessionStorage.setItem('dance', JSON.stringify(dance.formations));
+		console.log("saving comments: " + dance.comments);
 		$.post('/dances/' + dance_id + '/sync', {data : JSON.stringify({formations: dance.formations, comments: dance.comments})}, function(data){
 			window.setTimeout(function(){
 				$(".save_status").html("Saved!");
@@ -350,6 +352,7 @@ window.dance = {
 	},
 	addComment: function(text){
 		dance.comments[dance.f_id] = text;
+		dance.saveState($('#dance_id').val());
 	}
 }
 
