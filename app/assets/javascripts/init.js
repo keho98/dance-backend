@@ -71,7 +71,11 @@ $(document).ready(function(){
 
 	$('#feedback').on('hidden', function(){
 		dance.submitFeedback($('#feedback_field').val());
-	});	
+	});
+
+	$('#back_btn').hammer().on('tap', function(){
+		window.location = "/dances";
+	});
 
 	$('.play_slideshow').hammer().on('tap', function(){
 		// hide play slideshow button and show the stop slideshow button instead
