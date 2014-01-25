@@ -353,6 +353,9 @@ window.dance = {
 	addComment: function(text){
 		dance.comments[dance.f_id] = text;
 		dance.saveState($('#dance_id').val());
+	},
+	submitFeedback: function(text){
+		console.log("feedback: " + text);
+		
 	}
 }
-

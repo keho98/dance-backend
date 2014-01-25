@@ -53,6 +53,10 @@ $(document).ready(function(){
 		$('#comments').modal('show');
 	});
 
+	$('#feedback_button').hammer().on('tap', function(){
+		$('#feedback').modal('show');
+	});
+
 	$("#share_url").html(location.href);
 	$('#share_button').hammer().on('tap', function(){
 		$('#share_url_modal').modal('show');
@@ -64,6 +68,10 @@ $(document).ready(function(){
 	$('#comments').on('hidden', function(){
 		dance.addComment($('#comment_field').val());
 	});
+
+	$('#feedback').on('hidden', function(){
+		dance.submitFeedback($('#feedback_field').val());
+	});	
 
 	$('.play_slideshow').hammer().on('tap', function(){
 		// hide play slideshow button and show the stop slideshow button instead

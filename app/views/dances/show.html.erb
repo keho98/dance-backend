@@ -31,6 +31,9 @@
             <button class="btn stop_slideshow"><span>Stop</span></button>
             <button id="share_button" class="btn">Share</button>
           </div>
+          <br/>
+          <br/>
+          <button id="feedback_button" class="btn">Feedback</button>
         </div>
         <div id="main" class="span9">
           <% if @editable %>
@@ -63,13 +66,28 @@
         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Save Comment</button>
       </div>
     </div>
+    <div id="feedback" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <h3 id="myModalLabel">Feedback</h3>
+      </div>
+      <div class="modal-body">
+        <p> We take your feedback very seriously. </p>
+        <p> You can email Jay at <b>jayhp9@stanford.edu</b>, or simply use the below form. He'll receive your feedback either way. Thanks! </p>
+        <p> Go ahead, tell us whatever you want! We're all ears. :) </p>
+        <textarea id='feedback_field' rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Submit</button>
+      </div>
+    </div>
     <div id="share_url_modal" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <h3 id="myModalLabel">Share</h3>
       </div>
       <div class="modal-body">
-        <p> Share this dance with your dancers by giving them the URL of this page: </p>
-        <div id="share_url"></div>
+        <p> Share this dance with your dancers by giving them the URL of this page. </p>
+        <p> They will see a <b>read-only</b> version of the dance. </p>
+        <b><div id="share_url"></div></b>
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
