@@ -34,11 +34,18 @@ window.dance = {
 			var dot_clicked = false;
 			var touch = d3.mouse($('#canvas')[0]);
 			console.log("touch: " + touch);
+			var target = $(d3.event.target);
+			//var left_offset = target.offset().left;
+			//var top_offset = target.offset().top;
+			//console.log("left_offset: " + left_offset);
+			//console.log("top_offset: " + top_offset);
+			
 			for(var i = 0; i < dance.circles.length; i++){
-				console.log("circle " + i + " x: " + Math.abs(dance.circles[i].x + d3.event.target.offsetLeft));
-				console.log("circle " + i + " y: " + Math.abs(dance.circles[i].y + d3.event.target.offsetTop));
-				if(Math.abs(dance.circles[i].x + d3.event.target.offsetLeft - touch[0]) < dance.circles[i].r 
-					&& Math.abs(dance.circles[i].y + d3.event.target.offsetTop - touch[1]) < dance.circles[i].r ){
+				//console.log("circle " + i + " x: " + Math.abs(dance.circles[i].x + left_offset));
+				//console.log("circle " + i + " y: " + Math.abs(dance.circles[i].y + top_offset));
+
+				if(Math.abs(dance.circles[i].x - touch[0]) < dance.circles[i].r 
+					&& Math.abs(dance.circles[i].y - touch[1]) < dance.circles[i].r ){
 					dot_clicked = true;
 				}
 			}
@@ -53,9 +60,12 @@ window.dance = {
 			d3.event.preventDefault();
 			if(d3.event.touches.length <= 1){
 				var touch = [d3.event.touches[0].clientX, d3.event.touches[0].clientY];
+				//var target = $(d3.event.target);
+				//var left_offset = target.offset().left;
+				//var top_offset = target.offset().top;
 				for(var i = 0; i < dance.circles.length; i++){
-					if(Math.abs(dance.circles[i].x + d3.event.target.offsetLeft - touch[0]) < dance.circles[i].r 
-						&& Math.abs(dance.circles[i].y + d3.event.target.offsetTop - touch[1]) < dance.circles[i].r ){
+					if(Math.abs(dance.circles[i].x - touch[0]) < dance.circles[i].r 
+						&& Math.abs(dance.circles[i].y - touch[1]) < dance.circles[i].r ){
 						dance.circles[i].class = 'selected_dancer';
 					}
 				}
