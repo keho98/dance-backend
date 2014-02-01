@@ -34,7 +34,6 @@ window.dance = {
 			var dot_clicked = false;
 			var touch = d3.mouse($('#canvas')[0]);
 			console.log("touch: " + touch);
-			var target = $(d3.event.target);
 			
 			for(var i = 0; i < dance.circles.length; i++){
 				if(Math.abs(dance.circles[i].x - touch[0]) < dance.circles[i].r 
