@@ -1,6 +1,10 @@
 //colors = d3.scale.category10();
 window.sidebar = {
+	el: $('.nav-panel'),
 	init: function(){
+		this.el.click(function(){
+			$(this).toggleClass('open');
+		})
 		$(".add_dancer").click(function(){
 			$(".dancer_names").append("<li><input type='text' class='dancer_name_input'></input></li>");
 

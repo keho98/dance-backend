@@ -96,7 +96,7 @@ body{
 	-ms-user-select: none;
 	user-select: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-touch-callout: none;
+  	-webkit-touch-callout: none;
 }
 
 circle{
@@ -145,4 +145,27 @@ text{
 
 .read_only{
 	pointer-events: none;
+}
+
+.nav-panel{
+	background: steelblue;
+	position: fixed;
+	width: 25%;
+	height: 100%;
+	left : -22%;
+	top: 0;
+	cursor: pointer;
+	-webkit-transition:left .25s ease-in;  
+	-moz-transition:left .25s ease-in;  
+	-o-transition:left .25s ease-in;  
+	transition:left .25s ease-in; 
+}
+
+.nav-panel.open{
+	top: 0;
+	left: 0;
+	-webkit-transition:left .25s ease-in;  
+	-moz-transition:left .25s ease-in;  
+	-o-transition:left .25s ease-in;  
+	transition:left .25s ease-in; 
 }
