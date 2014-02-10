@@ -148,7 +148,8 @@ text{
 	pointer-events: none;
 }
 
-.nav-panel{
+.nav_panel{
+	z-index: 100;
 	background: steelblue;
 	position: fixed;
 	width: 25%;
@@ -162,7 +163,7 @@ text{
 	transition:left .25s ease-in; 
 }
 
-.nav-panel.open{
+.nav_panel.open{
 	top: 0;
 	left: 0;
 	-webkit-transition:left .25s ease-in;  
@@ -170,6 +171,19 @@ text{
 	-o-transition:left .25s ease-in;  
 	transition:left .25s ease-in; 
 }
+
+#comment_field{
+	width:90%;
+}
+
+.comment_container{
+	padding: 5%;
+}
+
+.panel_menu{
+	padding: 5%;
+}
+
 .delete_formation{
 	position:absolute;
 	top:-10px;

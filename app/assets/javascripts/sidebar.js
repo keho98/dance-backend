@@ -1,10 +1,15 @@
 //colors = d3.scale.category10();
 window.sidebar = {
-	el: $('.nav-panel'),
-	buttonEl: '.nav-toggle',
+	el: $('.nav_panel'),
+	buttonEl: '#nav_toggle',
 	init: function(){
-		this.el.click(function(){
-			$(this).toggleClass('open');
+		var _this = this;
+		$(this.buttonEl).click(function(){
+			_this.el.toggleClass('open');
+		});
+		$(".nav_close").click(function(){
+			_this.el.toggleClass('open');
+			dance.addComment($('#comment_field').val());
 		})
 		$(".add_dancer").click(function(){
 			$(".dancer_names").append("<li><input type='text' class='dancer_name_input'></input></li>");

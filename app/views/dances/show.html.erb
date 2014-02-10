@@ -29,7 +29,7 @@
             <button id="back_btn" class="btn">Back</button>
             <button class="btn play_slideshow"><span>Slideshow</span></button>
             <button class="btn stop_slideshow"><span>Stop</span></button>
-            <button id="comment_toggle" class="btn">Notes</button>
+            <button id="nav_toggle" class="btn">Notes</button>
           </div>
           <br/><br/>
           <div class="btn-group">
@@ -57,10 +57,16 @@
         </div>
       </div>
     </div><!-- container -->
-    <div class="nav-panel">
-      
+    <div class="nav_panel">
+      <div class="panel_menu">
+        <button class="btn btn-inverse nav_close">Close</button>
+      </div>
+      <div class="comment_container">
+        <h4>Comments</h4>
+        <textarea id='comment_field' rows="3"></textarea>
+      </div>
     </div>
-    <div id="comments" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--     <div id="comments" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <h3 id="myModalLabel">Comments</h3>
       </div>
@@ -71,7 +77,7 @@
       <div class="modal-footer">
         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Save Comment</button>
       </div>
-    </div>
+    </div> -->
 
     <!--
     <div id="feedback" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
