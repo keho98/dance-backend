@@ -1,6 +1,7 @@
 //colors = d3.scale.category10();
 window.sidebar = {
 	el: $('.nav-panel'),
+	buttonEl: '.nav-toggle',
 	init: function(){
 		this.el.click(function(){
 			$(this).toggleClass('open');
