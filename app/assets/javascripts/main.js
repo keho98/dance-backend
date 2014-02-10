@@ -55,9 +55,11 @@ window.dance = {
 			d3.event.preventDefault();
 			if(d3.event.touches.length <= 1){
 				var touch = [d3.event.touches[0].clientX, d3.event.touches[0].clientY];
+				var offset_left = $(d3.event.target).offset().left;
+				var offset_top = $(d3.event.target).offset().top;
 				for(var i = 0; i < dance.circles.length; i++){
-					if(Math.abs(dance.circles[i].x - touch[0]) < dance.circles[i].r 
-						&& Math.abs(dance.circles[i].y - touch[1]) < dance.circles[i].r ){
+					if(Math.abs(dance.circles[i].x + offset_left - touch[0]) < dance.circles[i].r 
+						&& Math.abs(dance.circles[i].y + offset_top - touch[1]) < dance.circles[i].r ){
 						dance.circles[i].class = 'selected_dancer';
 					}
 				}
