@@ -1,6 +1,7 @@
 html, body {
   height: 100%;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .stage{
@@ -152,9 +153,9 @@ text{
 	z-index: 100;
 	background: steelblue;
 	position: fixed;
-	width: 25%;
+	width: 20%;
 	height: 100%;
-	left : -25%;
+	left : -20%;
 	top: 0;
 	-webkit-transition:left .25s ease-in;  
 	-moz-transition:left .25s ease-in;  
