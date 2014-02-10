@@ -28,7 +28,7 @@ $(document).ready(function(){
 			// ADD THUMBNAIL TO TIMELINE - only in case nextFormation calls newFormation
 			if(!bool && dance.atEnd()) {
 				// add thumbnail to timeline
-				$('#next').before("<div class='thumb'><svg></svg></div>");
+				$('#next').before("<div class='thumb'><div><img src='/assets/delete.jpg' class='delete_formation'/></div><svg></svg></div>");
 				// make thumbnail selected
 				var children = $('.thumbnail_container').children('.thumb');
 				children.attr('class','thumb');
