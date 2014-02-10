@@ -25,10 +25,12 @@ window.dance = {
 	
 	init: function(cache){
 		var obj = this;
+
 		this.svg.on('touchstart', function(e){
 			obj.deselectAll();
 			obj.renderCircles(false);
 		});
+
 		this.svg.on('click', function(e){
 			// check if a dot was clicked
 			var dot_clicked = false;
@@ -48,6 +50,7 @@ window.dance = {
 				obj.renderCircles(false);
 			}
 		});
+
 		this.svg.on('touchmove', function(e){
 			d3.event.preventDefault();
 			if(d3.event.touches.length <= 1){
@@ -61,6 +64,7 @@ window.dance = {
 				dance.renderCircles(false);
 			}
 		});
+
 		if(cache){
 			console.log("Showing old");
 			console.log(cache);
@@ -68,19 +72,26 @@ window.dance = {
 			this.comments = cache.comments;
 			this.circles = this.formations[0];
 			if(this.comments[0]) $('#comment_field').val(this.comments[0]);
+			
+			this.renderTimeline();
+
+			/*
 			this.renderThumb(0,this.circles);
 			for(var i=1; i < this.formations.length; i++){
 				$('#next').before("<div class='thumb'><svg></svg></div>");
 				this.renderThumb(i,this.formations[i]);
 			}
-      for(var i=0; i<this.circles.length; i++){
-        $('.dancer_names').append('<li><a href="#">' + this.circles[i].dancer_name + '</a><input type="hidden" value="' + this.circles[i].dancer_name + '"/></li>')
-      }
-			this.renderCircles();
+			*/
+		    for(var i=0; i<this.circles.length; i++){
+		    	$('.dancer_names').append('<li><a href="#">' + this.circles[i].dancer_name + '</a><input type="hidden" value="' + this.circles[i].dancer_name + '"/></li>');
+		    }
+			this.renderCircles(false);
 		}
 		else{
 			this.formations.push(this.circles);
 		}
+
+		dance.showFormation(0);
 	},
 
 	addVerticalLines: function(){
@@ -156,6 +167,9 @@ window.dance = {
 		if(index >= this.formations.length || index < 0) {
 			console.log("invalid formation id");
 		} else {
+			/*if(index != this.f_id){ // if showing another formation, deselect all dancers here
+				dance.deselectAll();
+			}*/
 			console.log("showing formation " + index);
 			console.log("comment field value: " + $('#comment_field').val());
 			this.comments[this.f_id] = $('#comment_field').val();
@@ -166,7 +180,8 @@ window.dance = {
 			children.eq(this.f_id).addClass('selected_thumb');
 			$('#comment_field').val(this.comments[this.f_id]);
 			this.circles = this.formations[this.f_id];
-			this.renderCircles();
+			this.deselectAll();
+			this.renderCircles(false);
 		}
 	},
 	addNewFormation: function(){
@@ -262,7 +277,7 @@ window.dance = {
 				.attr('class', function(d){ return d.class})
 				.attr('r', function(d){ return d.r })
 				.each('end', function(){ this.dragging = false;});
-		d3.event.sourceEvent.stopPropagation();	
+		d3.event.sourceEvent.stopPropagation();
 		dance.renderThumb(dance.f_id, dance.circles);
 		// auto-save
 		dance.saveState($('#dance_id').val());
@@ -354,7 +369,46 @@ window.dance = {
 		dance.saveState($('#dance_id').val());
 	},
 	submitFeedback: function(text){
-		console.log("feedback: " + text);
-		
+		console.log("feedback: " + text);	
+	},
+	deleteFormation: function(f_id){
+		if (f_id < 0 || f_id > dance.formations.length-1) {
+			return false;
+		}
+
+		var num_formations = dance.formations.length;
+		var curr_f_id = this.f_id;
+
+		// remove formation
+		dance.formations.splice(f_id, 1);
+
+		// render timeline again
+		dance.renderTimeline();
+
+		if (curr_f_id == f_id && f_id == num_formations - 1) { // last formation removed when on it
+			dance.showFormation(dance.formations.length - 1); // show the new last formation (based on new length of formations array)
+		} else { // removed some other formation
+			if(curr_f_id <= f_id) {
+				dance.showFormation(curr_f_id);
+			} else if (curr_f_id > f_id) {
+				dance.showFormation(curr_f_id - 1);
+			}
+		}
+
+		// save state of dance
+		dance.saveState($('#dance_id').val());
+
+		return true;
+	},
+	renderTimeline: function(){
+		// remove all thumbs from the timeline's container (will render them again below)
+		$('.thumbnail_container').children('.thumb').remove();
+
+		// render thumbnails again, each time adding a new div and svg before the plus sign
+		for(var i=0; i < dance.formations.length; i++){
+			$('#next').before("<div class='thumb'><div><img src='/assets/delete.jpg' class='delete_formation'/></div><svg></svg></div>");
+			//$('#next').before("<div class='thumb'><svg></svg></div>");
+			dance.renderThumb(i,dance.formations[i]);
+		}
 	}
 }

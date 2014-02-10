@@ -8,7 +8,7 @@ $(document).ready(function(){
 		dance.removeSelected();
 	});
 	$('#next').hammer().on('tap', function(){
-		$('#next').before("<div class='thumb'><svg></svg></div>");
+		$('#next').before("<div class='thumb'><div><img src='/assets/delete.jpg' class='delete_formation'/></div><svg></svg></div>");
 		dance.newFormation();
 		//dance.nextFormation();
 		dance.deselectAll();
@@ -117,10 +117,20 @@ $(document).ready(function(){
 		window.clearInterval(interval);
 	});
 
-	$('.timeline').hammer().on('tap', '.thumb', function(){
+	$('.timeline').hammer().on('tap', '.thumb', function(ev){
 		var curr_thumb = $(this);
 		var index = curr_thumb.parent().children('.thumb').index(curr_thumb);
-		console.log("showing index " + index);
-		dance.showFormation(index);
+		var target = $(ev.target);
+		if (target.is(".delete_formation")) {
+			ev.stopPropagation();
+			console.log("deleting formation");
+			var del = confirm("Are you sure you want to delete the formation?");
+			if(del) {
+				dance.deleteFormation(index);
+			}
+		} else {
+			console.log("showing index " + index);
+			dance.showFormation(index);
+		}
 	});
 });

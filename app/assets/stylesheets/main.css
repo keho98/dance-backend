@@ -59,6 +59,7 @@ html, body {
 	width:3000px;
 }
 .thumb{
+	position:relative;
 	margin:5px 2px;
 	width:115px;
 	height:82px;
@@ -145,4 +146,13 @@ text{
 
 .read_only{
 	pointer-events: none;
+}
+
+.delete_formation{
+	position:absolute;
+	top:-10px;
+	right:-8px;
+	width:20px;
+	height:20px;
+	margin:0px;
 }
