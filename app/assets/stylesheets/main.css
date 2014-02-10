@@ -156,7 +156,6 @@ text{
 	height: 100%;
 	left : -25%;
 	top: 0;
-	cursor: pointer;
 	-webkit-transition:left .25s ease-in;  
 	-moz-transition:left .25s ease-in;  
 	-o-transition:left .25s ease-in;  
