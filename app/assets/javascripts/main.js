@@ -142,18 +142,22 @@ window.dance = {
 	nextFormation: function(){
 		if(this.f_id === this.formations.length - 1){
 			// create new formation at end
-			console.log("no here");
-			this.newFormation();
+			//console.log("no here");
+			//this.newFormation();
 			return false;
 		} else {
 			// go to next formation that already exists
 			console.log("here");
 			this.f_id += 1;
+			$('#formation_number').html(this.f_id);
 			this.showFormation(this.f_id);
 			return true;
 		}
 	},
 	newFormation: function(){
+		// add new thumb
+		$('#next').before("<div class='thumb'><div><img src='/assets/delete.jpg' class='delete_formation'/></div><svg></svg></div>");
+
 		// first show the last formation
 		this.f_id = this.formations.length - 1;
 		this.showFormation(this.f_id);
@@ -164,6 +168,12 @@ window.dance = {
 		console.log(this.f_id);
 		console.log(this.formations[this.f_id]);
 		this.renderThumb(this.f_id, this.formations[this.f_id]);
+
+		this.deselectAll();
+		var children = $('.thumbnail_container').children('.thumb');
+		children.attr('class','thumb');
+		$('#next').prev().attr('class','thumb selected_thumb');
+		$('#formation_number').html(dance.formations.length + 1);
 	},
 	showFormation: function(index){
 		if(index >= this.formations.length || index < 0) {

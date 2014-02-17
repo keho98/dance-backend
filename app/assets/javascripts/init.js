@@ -8,33 +8,18 @@ $(document).ready(function(){
 		dance.removeSelected();
 	});
 	$('#next').hammer().on('tap', function(){
-		$('#next').before("<div class='thumb'><div><img src='/assets/delete.jpg' class='delete_formation'/></div><svg></svg></div>");
 		dance.newFormation();
-		//dance.nextFormation();
-		dance.deselectAll();
-		var children = $('.thumbnail_container').children('.thumb');
-		children.attr('class','thumb');
-		$('#next').prev().attr('class','thumb selected_thumb');
-		$('#formation_number').html(dance.formations.length + 1);
 	});
 	$('.stage').hammer().on('pinch', function(e){
 		console.log("Pinch Detected...")
-	})
+	});
 	$('.stage').hammer().on('swipeleft', function(e){
 		if(e.gesture.touches.length > 0){
 			// go to next formation if it exists, else create new formation
 			var bool = dance.nextFormation();
-			dance.deselectAll();
-			// ADD THUMBNAIL TO TIMELINE - only in case nextFormation calls newFormation
 			if(!bool && dance.atEnd()) {
-				// add thumbnail to timeline
-				$('#next').before("<div class='thumb'><div><img src='/assets/delete.jpg' class='delete_formation'/></div><svg></svg></div>");
-				// make thumbnail selected
-				var children = $('.thumbnail_container').children('.thumb');
-				children.attr('class','thumb');
-				$('#next').prev().attr('class','thumb selected_thumb');
+				dance.newFormation();
 			}
-			$('#formation_number').html(dance.f_id + 1);
 		}
 	});
 
