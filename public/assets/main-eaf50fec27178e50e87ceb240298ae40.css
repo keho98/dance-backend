@@ -1,0 +1,194 @@
+html, body {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.stage{
+	margin: 20px 20px 0;
+	background-image: url('/img/stage.jpg');
+}
+
+#previous{
+	position: fixed;
+	bottom: 25px;
+	right: 120px;
+}
+
+#next{
+	width:115px;
+	height:82px;
+	margin:5px 2px;
+	border-width:5px;
+	border-style:solid;
+	border-color:white;
+	cursor: pointer;
+	-webkit-transition:background-color .25s ease-in;  
+	-moz-transition:background-color .25s ease-in;  
+	-o-transition:background-color .25s ease-in;  
+	transition:background-color .25s ease-in; 
+}
+
+#next:hover{
+	background-color:#5B77CC;
+	-webkit-transition:background-color .25s ease-in;  
+	-moz-transition:background-color .25s ease-in;  
+	-o-transition:background-color .25s ease-in;  
+	transition:background-color .25s ease-in;  
+}
+
+#formation_number{
+	font-size:25px;
+	position: fixed;
+	bottom: 28px;
+	right: 98px;
+	text-align: center;
+}
+
+.color{
+	cursor:pointer;
+}
+
+.timeline{
+	width:750px;
+	height:100px;
+	margin:20px;
+	overflow-x:scroll;
+	overflow-y:hidden;
+}
+.thumbnail_container{
+	width:3000px;
+}
+.thumb{
+	position:relative;
+	margin:5px 2px;
+	width:115px;
+	height:82px;
+	float:left;
+	background-image: url('/img/stage_thumb.jpg');
+	border-width:5px;
+	border-style:solid;
+	border-color:white;
+	cursor:pointer;
+	-webkit-transition:border-color .25s ease-in;  
+	-moz-transition:border-color .25s ease-in;  
+	-o-transition:border-color .25s ease-in;  
+	transition:border-color .25s ease-in;  
+}
+
+.thumb:hover{
+	border-color:#5B77CC;
+	-webkit-transition:border-color .25s ease-in;  
+	-moz-transition:border-color .25s ease-in;  
+	-o-transition:border-color .25s ease-in;  
+	transition:border-color .25s ease-in;  
+}
+
+.selected_thumb{
+	border-style:solid;
+	border-width:5px;
+	border-color:black;
+}
+
+body{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+  	-webkit-touch-callout: none;
+}
+
+circle{
+	stroke: #aaaaaa;
+	stroke-width: 2px;	
+}
+
+.dancer{
+	fill: white;
+	cursor:pointer;
+}
+
+.selected_dancer{
+	stroke: black;
+	stroke-width: 5px;
+	fill: #ffbb78;
+	cursor:pointer;
+}
+
+.header{
+	font-weight:bold;
+	cursor:normal;
+}
+
+.add_dancer{
+	cursor:pointer;
+}
+
+text{
+	font-weight: 900;
+}
+
+.dancer_names{
+	height: 180px;
+	overflow: scroll;
+	margin: 0;
+}
+
+.dancer_name_input{
+	width:93%;
+}
+
+#share_url{
+	z-index:5000;
+}
+
+.read_only{
+	pointer-events: none;
+}
+
+.nav_panel{
+	z-index: 100;
+	background: steelblue;
+	position: fixed;
+	width: 20%;
+	height: 100%;
+	left : -20%;
+	top: 0;
+	-webkit-transition:left .25s ease-in;  
+	-moz-transition:left .25s ease-in;  
+	-o-transition:left .25s ease-in;  
+	transition:left .25s ease-in; 
+}
+
+.nav_panel.open{
+	top: 0;
+	left: 0;
+	-webkit-transition:left .25s ease-in;  
+	-moz-transition:left .25s ease-in;  
+	-o-transition:left .25s ease-in;  
+	transition:left .25s ease-in; 
+}
+
+#comment_field{
+	width:90%;
+}
+
+.comment_container{
+	padding: 5%;
+}
+
+.panel_menu{
+	padding: 5%;
+}
+
+.delete_formation{
+	position:absolute;
+	top:-10px;
+	right:-8px;
+	width:20px;
+	height:20px;
+	margin:0px;
+}

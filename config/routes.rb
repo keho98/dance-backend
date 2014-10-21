@@ -1,13 +1,17 @@
 DanceBackend::Application.routes.draw do
+  get "website/landing"
+
+  root :to => 'website#landing'
+
   devise_for :users 
   
   resources :dances do
     member do
       post 'sync'
       get 'get_data'
+      get 'print'
     end
   end
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -55,10 +59,6 @@ DanceBackend::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'dances#index'
 
   # See how all your routes lay out with "rake routes"
 

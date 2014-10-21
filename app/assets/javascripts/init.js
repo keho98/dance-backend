@@ -1,40 +1,27 @@
 $(document).ready(function(){
+	var dance_id = $('#dance_id').val();
+
 	sidebar.init();
 	dance.addVerticalLines();
 	dance.addHorizontalLines();
-	dance.readState($('#dance_id').val());
+	dance.readState(dance_id);
 	
 	$('#delete').on('click', function(){
 		dance.removeSelected();
 	});
 	$('#next').hammer().on('tap', function(){
-		$('#next').before("<div class='thumb'><svg></svg></div>");
 		dance.newFormation();
-		//dance.nextFormation();
-		dance.deselectAll();
-		var children = $('.thumbnail_container').children('.thumb');
-		children.attr('class','thumb');
-		$('#next').prev().attr('class','thumb selected_thumb');
-		$('#formation_number').html(dance.formations.length + 1);
 	});
 	$('.stage').hammer().on('pinch', function(e){
 		console.log("Pinch Detected...")
-	})
+	});
 	$('.stage').hammer().on('swipeleft', function(e){
 		if(e.gesture.touches.length > 0){
 			// go to next formation if it exists, else create new formation
 			var bool = dance.nextFormation();
-			dance.deselectAll();
-			// ADD THUMBNAIL TO TIMELINE - only in case nextFormation calls newFormation
 			if(!bool && dance.atEnd()) {
-				// add thumbnail to timeline
-				$('#next').before("<div class='thumb'><svg></svg></div>");
-				// make thumbnail selected
-				var children = $('.thumbnail_container').children('.thumb');
-				children.attr('class','thumb');
-				$('#next').prev().attr('class','thumb selected_thumb');
+				dance.newFormation();
 			}
-			$('#formation_number').html(dance.f_id + 1);
 		}
 	});
 
@@ -53,8 +40,12 @@ $(document).ready(function(){
 		$('#comments').modal('show');
 	});
 
-	$('#feedback_button').hammer().on('tap', function(){
+	/*$('#feedback_button').hammer().on('tap', function(){
 		$('#feedback').modal('show');
+	});*/
+
+	$('#print_button').hammer().on('tap', function(){
+		window.location = "/dances/" + dance_id + "/print";
 	});
 
 	$("#share_url").html(location.href);
@@ -117,10 +108,20 @@ $(document).ready(function(){
 		window.clearInterval(interval);
 	});
 
-	$('.timeline').hammer().on('tap', '.thumb', function(){
+	$('.timeline').hammer().on('tap', '.thumb', function(ev){
 		var curr_thumb = $(this);
 		var index = curr_thumb.parent().children('.thumb').index(curr_thumb);
-		console.log("showing index " + index);
-		dance.showFormation(index);
+		var target = $(ev.target);
+		if (target.is(".delete_formation")) {
+			ev.stopPropagation();
+			console.log("deleting formation");
+			var del = confirm("Are you sure you want to delete the formation?");
+			if(del) {
+				dance.deleteFormation(index);
+			}
+		} else {
+			console.log("showing index " + index);
+			dance.showFormation(index);
+		}
 	});
 });

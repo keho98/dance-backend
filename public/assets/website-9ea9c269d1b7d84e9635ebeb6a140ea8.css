@@ -1,0 +1,61 @@
+html{
+	font-family: 'Exo 2', sans-serif;
+	background-color:#FCFFFE;
+}
+
+#header{
+	font-size: 50px;
+	font-weight: bold;
+	margin:-10px 0 0 -10px;
+	padding: 5px 0px 0px 20px;
+	color:white;
+	background-color: #27ADF5;
+	width:100%;
+}
+
+#container{
+	padding: 50px 40px 0px 50px;
+	width: 90%;
+	margin: 0 auto;
+}
+#about{
+	font-size: 20px;
+	float: left;
+	width: 50%;
+	color: black;
+	margin-top: 100px;
+	position: center center;
+	margin-right: -20px;}
+
+#about a{
+	text-decoration: none;
+	color: white;
+	font-size: 30px;
+	font-weight: 400px;
+
+}
+
+#headline{
+	font-weight:bold;
+	font-size: 25px;
+	margin-bottom: -20px;
+}
+
+#button{
+	border:2px solid;
+	border-radius:25px;
+	float: center;
+	padding: 10px;
+	margin:20px;
+	width: 175px;
+	text-align: center;
+	background-color: #27ADF5;
+}
+
+
+
+
+#video{
+	float:right;
+	width:50%;
+}
