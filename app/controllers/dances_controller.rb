@@ -1,5 +1,5 @@
 class DancesController < ApplicationController
-  skip_before_filter :authenticate_user!, :only => [:show, :get_data]
+  skip_before_filter :authenticate_user!, :only => [:show, :get_data, :print]
   protect_from_forgery :except => :sync
   # GET /dances
   # GET /dances.json
@@ -96,6 +96,13 @@ class DancesController < ApplicationController
       format.html { redirect_to dances_url }
       format.json { head :no_content }
     end
+  end
+
+  # GET /dances/1/print
+  def print
+    @dance = Dance.find(params[:id])
+    @data = @dance.get_data
+    render :layout => 'print_layout'
   end
   
 end

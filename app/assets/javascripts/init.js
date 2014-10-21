@@ -1,8 +1,10 @@
 $(document).ready(function(){
+	var dance_id = $('#dance_id').val();
+
 	sidebar.init();
 	dance.addVerticalLines();
 	dance.addHorizontalLines();
-	dance.readState($('#dance_id').val());
+	dance.readState(dance_id);
 	
 	$('#delete').on('click', function(){
 		dance.removeSelected();
@@ -38,8 +40,12 @@ $(document).ready(function(){
 		$('#comments').modal('show');
 	});
 
-	$('#feedback_button').hammer().on('tap', function(){
+	/*$('#feedback_button').hammer().on('tap', function(){
 		$('#feedback').modal('show');
+	});*/
+
+	$('#print_button').hammer().on('tap', function(){
+		window.location = "/dances/" + dance_id + "/print";
 	});
 
 	$("#share_url").html(location.href);
